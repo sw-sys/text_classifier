@@ -58,8 +58,15 @@ with open ("HEALTHLINE_Definitive_Guide_to_Healthy_Eat.txt", "r", encoding='utf-
 # make object of text
 sentences = sentence_model(text)
 
+### ANALYSIS
+
+# create dict, index = sentence position
+final_data = []
+
 # iterate over text
 for sentence in sentences.sents:
     doc = nlp(sentence.text)
-    print(doc)
-    print(doc._.cats)
+    final_data.append({"sentence": doc.text, "Categories:": doc._.cats})
+
+# print by sentence position
+print(final_data[3])
