@@ -72,6 +72,10 @@ def gpu():
         doc = nlp(sentence.text)
         final_data.append({"sentence": doc.text, "cats": doc._.cats})
 
+# TUTORIAL - continue from 12:51
+# https://www.youtube.com/watch?v=qLux8NfSEQQ
+
+### EXECUTE TIME IT
 if __name__ == "__main__":
     print("GPU execution time: ",timeit.timeit(gpu, number=1))
 
