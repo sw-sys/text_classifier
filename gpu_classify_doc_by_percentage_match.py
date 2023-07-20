@@ -22,6 +22,19 @@ data = {
               "Citrus fruits: Citrus fruits such as oranges, pomelo, grapefruits, limes and lemons are rich in vitamin C",
               "When buying and serving fruits, it is important to aim for variety",],
 
+        "food": ["protein and carbs",
+                 "saturated and unsaturated fat"
+                 "sugar",
+                 "fruit",
+                 "veg",
+                 "fish",
+                 "nuts",
+                 "legumes",
+                 "chocolate",
+                 "crisps",
+                 "macros"
+        ],
+
         "health": ["high in vitamins and minerals",
                "fitness",
                "energy and wellness",
@@ -56,13 +69,13 @@ def gpu():
     # identify sentences - take whole text and identify breaks
     sentence_model.add_pipe("sentencizer")
 
-    with open ("HEALTHLINE_Definitive_Guide_to_Healthy_Eat.txt", "r", encoding='utf-8') as f:
+    with open ("chem_food_nutrition.txt", "r", encoding='utf-8') as f:
         text = f.read()
 
     # make object of text
     sentences = sentence_model(text)
 
-    ### ANALYSIS
+    ### CATEGORISATION
 
     # create dict, index = sentence position
     final_data = []
@@ -72,8 +85,17 @@ def gpu():
         doc = nlp(sentence.text)
         final_data.append({"sentence": doc.text, "cats": doc._.cats})
 
-# TUTORIAL - continue from 12:51
-# https://www.youtube.com/watch?v=qLux8NfSEQQ
+    ### ANALYSIS
+
+    # for item in final_data[:2]:
+    #     print(item["sentence"])
+    #     print(item["cats"]["fear"])
+
+    for i, item in enumerate(final_data[1:1000]):
+        if item["cats"]["fruit"] > .70:
+            print(f"Item {i+1}:")
+            print(item["sentence"])
+            print(item["cats"])
 
 ### EXECUTE TIME IT
 if __name__ == "__main__":
